@@ -1,4 +1,4 @@
-name: Grille des sites
+name: Websites grid
 
 on:
   schedule:
