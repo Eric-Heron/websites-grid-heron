@@ -1,0 +1,43 @@
+name: Grille des sites
+
+on:
+  schedule:
+    # Toutes les 30 minutes (à :07 et :37, heures moins chargées chez GitHub).
+    - cron: "7,37 * * * *"
+  workflow_dispatch:        # bouton « Run workflow » pour lancer à la main
+
+permissions:
+  contents: write
+
+concurrency:
+  group: grille
+  cancel-in-progress: true
+
+jobs:
+  grille:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Installer les outils
+        run: |
+          pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
+
+      - name: Capturer les sites et assembler la grille
+        run: python capture.py
+
+      - name: Publier sur GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          publish_branch: gh-pages
+          force_orphan: true    # garde une seule version : le dépôt ne grossit pas
+          commit_message: "Grille mise à jour"
