@@ -15,12 +15,12 @@ concurrency:
 
 jobs:
   grille:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04   # version figée : Playwright y est bien supporté
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
           cache: pip
