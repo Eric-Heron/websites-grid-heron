@@ -1,0 +1,8 @@
+# Une ligne par site : Nom | Adresse
+# Les lignes qui commencent par # sont ignorées.
+Acuitis | https://fr.acuitis.com
+AcoustiCentre | https://www.acousticentre.ch
+Unisson | https://www.laboratoires-unisson.com
+GrandAudition | https://www.grandaudition.com
+Direct Optic | https://www.direct-optic.fr
+Fondation Héron | https://www.fondationheron.ch
