@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grille des sites</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #121214; overflow: hidden; }
+  img { width: 100vw; height: 100vh; object-fit: contain; display: block; }
+</style>
+</head>
+<body>
+<img id="grille" src="grille.jpg" alt="">
+<script>
+  // Recharge l'image toutes les 5 minutes, sans écran blanc :
+  // la nouvelle image n'est affichée qu'une fois entièrement téléchargée.
+  const img = document.getElementById("grille");
+  function rafraichir() {
+    const nouvelle = new Image();
+    nouvelle.onload = () => { img.src = nouvelle.src; };
+    nouvelle.src = "grille.jpg?t=" + Date.now();
+  }
+  rafraichir();
+  setInterval(rafraichir, 5 * 60 * 1000);
+</script>
+</body>
+</html>
